@@ -5,6 +5,47 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Wave</title>
+    <link rel="stylesheet" href="./node_modules/tailwindcss/tailwind.css" />
   </head>
-  <body></body>
+  <body class="flex min-h-screen p-8 text-neutral-800 bg-neutral-100">
+    <form
+      class="flex flex-col items-center justify-center w-full max-w-xs m-auto"
+    >
+      <h1 class="mb-8 text-3xl font-bold text-center">Please login</h1>
+      <div class="form-control">
+        <input id="email" type="email" />
+        <label for="email">Email</label>
+      </div>
+      <div class="form-control">
+        <input id="password" type="password" />
+        <label for="password">Password</label>
+      </div>
+
+      <button
+        class="w-full px-4 py-2 text-lg text-white transition-all bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 ring-indigo-300"
+      >
+        Login
+      </button>
+    </form>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelector("form")
+          .addEventListener("submit", (e) => e.preventDefault());
+
+        document.querySelectorAll(".form-control").forEach((el) => {
+          el.getElementsByTagName("input").item(0).placeholder = " ";
+          const label = el.getElementsByTagName("label").item(0);
+          const text = label.innerHTML;
+          label.innerHTML = "";
+          [...text].forEach((char, index) => {
+            const span = document.createElement("span");
+            span.innerHTML = char;
+            span.style.transitionDelay = index * 75 + "ms";
+            label.append(span);
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
